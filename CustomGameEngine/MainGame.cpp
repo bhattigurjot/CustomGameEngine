@@ -12,11 +12,17 @@ MainGame::MainGame()
 
 MainGame::~MainGame()
 {
-	// Delete context if global
-	SDL_GL_DeleteContext(_gl_context);
+	// Delete context
+	if (_gl_context !! _gl_context != nullptr)
+	{
+		SDL_GL_DeleteContext(_gl_context);
+	}
 
 	// Destroy the window
-	SDL_DestroyWindow(_window);
+	if (_window != nullptr)
+	{
+		SDL_DestroyWindow(_window);
+	}
 	
 	// Quit SDL
 	SDL_Quit();
