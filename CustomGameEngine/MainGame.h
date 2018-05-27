@@ -3,6 +3,9 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 
+#include <string>
+#include <iostream>
+
 enum class GAMESTATE {
 	PLAY,
 	EXIT
@@ -20,6 +23,7 @@ private:
 	void InitializeSystems();
 	void GameLoop();
 	void ProcessInput();
+	void Failure(std::string);
 
 	SDL_Window * _window;
 	int _screenWidth;

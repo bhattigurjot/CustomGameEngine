@@ -18,11 +18,25 @@ MainGame::~MainGame()
 	SDL_Quit();
 }
 
+void MainGame::Failure(std::string str)
+{
+	std::cout << str << std::endl;
+	
+	// Quit SDL
+	SDL_Quit();
+	
+	// exit
+	exit(1);
+}
 
 void MainGame::InitializeSystems() 
 {
 	// Initialize SDL
-	SDL_Init(SDL_INIT_EVERYTHING);
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) // 0 is success
+	{
+		SDL_Log("Unable to initialize SDL: %s\n", SDL_GetError());
+	}
+	
 
 	// Create a window
 	_window = SDL_CreateWindow("Game Engine Test",
@@ -31,6 +45,26 @@ void MainGame::InitializeSystems()
 				_screenWidth,
 				_screenHeight,
 				SDL_WINDOW_OPENGL);
+
+	if (_window == nullptr)
+	{
+		Failure("SDL Window could not be created!");
+	}
+
+	// Create OpenGL context
+	SDL_GLContext glContext = SDL_GL_CreateContext(_window);
+	if (glContext == nullptr)
+	{
+		Failure("SDL Context could not be created!");
+	}
+
+	// Initialize GLEW
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		SDL_Log("Glew could not be initalized: %s\n", glewGetErrorString(err));
+	}
+	SDL_Log("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 }
 
 void MainGame::RunGame()
@@ -57,6 +91,8 @@ void MainGame::ProcessInput()
 		case SDL_QUIT:
 			_gameState = GAMESTATE::EXIT;
 			break;
+		case SDL_MOUSEMOTION:
+			std::cout << evt.motion.x << " " << evt.motion.y << std::endl;
 		default:
 			break;
 		}
