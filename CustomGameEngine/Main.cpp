@@ -1,9 +1,9 @@
-#pragma
+#include "MainGame.h"
 
-#include <SDL\SDL.h>
-
-int main(int argc, char*argv[])
+int main(int argc, char**argv)
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
+	MainGame game;
+	game.RunGame();
+
 	return 0;
 }
