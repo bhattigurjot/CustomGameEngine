@@ -3,6 +3,11 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 
+enum class GAMESTATE {
+	PLAY,
+	EXIT
+};
+
 class MainGame
 {
 public:
@@ -13,9 +18,12 @@ public:
 
 private:
 	void InitializeSystems();
+	void GameLoop();
+	void ProcessInput();
 
 	SDL_Window * _window;
 	int _screenWidth;
 	int _screenHeight;
+	GAMESTATE _gameState;
 };
 

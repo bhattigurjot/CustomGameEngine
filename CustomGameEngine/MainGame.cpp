@@ -1,11 +1,10 @@
 #include "MainGame.h"
 
-
-
 MainGame::MainGame()
 	:_window(nullptr),
 	_screenWidth(800),
-	_screenHeight(600)
+	_screenHeight(600),
+	_gameState(GAMESTATE::PLAY)
 {
 }
 
@@ -37,4 +36,29 @@ void MainGame::InitializeSystems()
 void MainGame::RunGame()
 {
 	InitializeSystems();
+	GameLoop();
+}
+
+void MainGame::GameLoop()
+{
+	while (_gameState != GAMESTATE::EXIT)
+	{
+		ProcessInput();
+	}
+}
+
+void MainGame::ProcessInput()
+{
+	SDL_Event evt;
+	while(SDL_PollEvent(&evt))
+	{
+		switch (evt.type)
+		{
+		case SDL_QUIT:
+			_gameState = GAMESTATE::EXIT;
+			break;
+		default:
+			break;
+		}
+	}
 }
