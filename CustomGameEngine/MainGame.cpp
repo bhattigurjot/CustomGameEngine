@@ -13,7 +13,7 @@ MainGame::MainGame()
 MainGame::~MainGame()
 {
 	// Delete context
-	if (_gl_context !! _gl_context != nullptr)
+	if (_gl_context || _gl_context != nullptr)
 	{
 		SDL_GL_DeleteContext(_gl_context);
 	}
