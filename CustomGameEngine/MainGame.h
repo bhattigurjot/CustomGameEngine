@@ -6,6 +6,8 @@
 #include <string>
 #include <iostream>
 
+#include "Sprite.h"
+
 enum class GAMESTATE {
 	PLAY,
 	EXIT
@@ -31,5 +33,7 @@ private:
 	int _screenWidth;
 	int _screenHeight;
 	GAMESTATE _gameState;
+
+	Sprite _sprite;
 };
 

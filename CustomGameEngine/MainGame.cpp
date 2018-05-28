@@ -86,6 +86,9 @@ void MainGame::InitializeSystems()
 void MainGame::RunGame()
 {
 	InitializeSystems();
+
+	_sprite.Init(-1.0f, -1.0f, 1.0f, 1.0f);
+
 	GameLoop();
 }
 
@@ -123,8 +126,8 @@ void MainGame::Draw()
 	// Clear the color buffer bit and depth buffer bit
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
 	// Draw stuff here
+	_sprite.Draw();
 
 	// Swap the buffers for the window
 	SDL_GL_SwapWindow(_window);
